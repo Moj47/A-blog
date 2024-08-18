@@ -13,6 +13,7 @@
         <h2>{{ $post->title }}</h2>
         <p>{{ $post->description }}</p>
         <img src="{{ $post->image }}" alt="Post Image">
+        <a href="{{route('post.show',$post->id)}}">Read more</a>
     </div>
     @endforeach
   @endif
