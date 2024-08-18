@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Tag;
+use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,12 +20,14 @@ class PostFactory extends Factory
      */
     public function definition(): array
 {
-    $image = UploadedFile::fake()->image('post_image.jpg', 640, 480);
-
+    $category = Category::factory()->create();
     return [
         'title' => $this->faker->title(),
         'text' =>$this->faker->text(),
-        'image' => UploadedFile::fake()->image('file1.png', 600, 600),
+        'category_id'=>$category->id,
+        'image' =>$this->faker->imageUrl()
     ];
+
 }
+
 }
