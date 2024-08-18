@@ -108,4 +108,13 @@ class PostController extends Controller
      }
      return redirect()->route('admin.posts.index');
    }
+   public function delete(Post $post)
+   {
+    if (File::exists('storage/'.$post->image)) {
+        File::delete('storage/'.$post->image);
+    }    $post->tags()->detach();
+    $post->delete();
+    return redirect()->route('admin.posts.index');
+
+   }
 }

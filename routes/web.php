@@ -11,6 +11,7 @@ Route::group([],function () {
     Route::post('/store',[PostController::class,'store'])->name('admin.posts.store');
     Route::get('/edit/{post}',[PostController::class,'edit'])->name('admin.posts.edit');
     Route::put('/update/{post}',[PostController::class,'update'])->name('admin.posts.update');
+    Route::get('/delete/{post}',[PostController::class,'delete'])->name('admin.posts.delete');
 });
 Auth::routes();
 
