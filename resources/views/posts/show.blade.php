@@ -9,14 +9,14 @@
                     <div class="card-body">
                         <div class="">
                             @if($post->image)
-                            <img src="{{ $post->image }}" alt="Post Image">
+                            <img width="20%" src="storage/{{ $post->image }}" alt="Post Image">
 
                             @else
                             <h1>No image for this post</h1>
                             @endif
                         </div>
 
-                        <div class="my-5">{!! nl2br($post->post) !!}</div>
+                        <div class="my-5">{!! nl2br($post->text) !!}</div>
 
                         @foreach ($post->tags as $tag)
                             <a href="#" class="btn btn-outline-secondary">#{{ $tag->name }}</a>

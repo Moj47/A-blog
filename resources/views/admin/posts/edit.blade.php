@@ -7,12 +7,13 @@
             </div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route("admin.posts.store") }}" enctype="multipart/form-data">
+                <form method="post" action="{{ route("admin.posts.update",$post->id) }}" enctype="multipart/form-data">
                     @csrf
+                    @method('put')
                     <div class="form-group">
                         <label class="required" for="title">Title</label>
                         <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text"
-                               name="title" id="title" value="{{ old('title') }}" required>
+                               name="title" id="title" value="{{ $post->title }}" required>
                         @if($errors->has('title'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('title') }}
@@ -23,7 +24,8 @@
                     <div class="form-group">
                         <label class="required" for="image">Image</label>
                         <input class="form-control {{ $errors->has('image') ? 'is-invalid' : '' }}" type="file"
-                               name="image" id="image" value="{{ old('image') }}">
+                        name="image" id="image" value="{{ old('image') }}">
+                        <p style="color: red">If you don't select any image old image would be kept</p>
                         @if($errors->has('image'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('image') }}
@@ -34,7 +36,7 @@
                     <div class="form-group">
                         <label class="required" for="tags">Tags</label>
                         <input class="form-control {{ $errors->has('tags') ? 'is-invalid' : '' }}" type="text"
-                               name="tags" id="tags" value="{{ old('tags') }}" required>
+                               name="tags" id="tags" value="@foreach($tags as $tag){{$tag->name}} @endforeach" required>
                         @if($errors->has('tags'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('tags') }}
@@ -49,7 +51,7 @@
                             <option value="0">--- SELECT CATEGORY ---</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}"
-                                    @if ($category->id == old('category')) selected @endif>{{ $category->name }}</option>
+                                    @if ($category->id == $post->category_id) selected @endif>{{ $category->name }}</option>
                             @endforeach
                         </select>
                         @if($errors->has('category'))
@@ -62,7 +64,7 @@
                     <div class="form-group">
                         <label for="post">Post</label>
                         <textarea class="form-control {{ $errors->has('post') ? 'is-invalid' : '' }}" name="post"
-                                  id="post">{{ old('post') }}</textarea>
+                                  id="post">{{ $post->text }}</textarea>
                         @if($errors->has('post'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('post') }}

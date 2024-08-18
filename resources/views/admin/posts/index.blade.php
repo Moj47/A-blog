@@ -16,7 +16,7 @@
       <img width="20%" height="50%" src="storage/{{ $post->image }}" alt="Post Image">
   @else
       <p>No image</p>
-  @endif      <a href="{{route('post.show',$post->id)}}">Read more</a>
+  @endif      <a href="{{route('admin.posts.edit',$post->id)}}">Edit</a>
   </div>
   <br>
   <br>
