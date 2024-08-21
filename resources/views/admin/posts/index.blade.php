@@ -13,8 +13,8 @@
       <h2>{{ $post->title }}</h2>
       <p>{{ $post->text }}</p>
       @if($post->image)
-      <img width="20%" height="50%" src="storage/{{ $post->image }}" alt="Post Image">
-  @else
+      <img src="{{URL::asset('storage/'.$post->image)}}" alt="profile Pic" height="200" width="200">
+      @else
       <p>No image</p>
   @endif
   <br>
