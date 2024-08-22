@@ -13,7 +13,7 @@ Route::group(['middleware'=>'auth' ,'prefix' => 'admin', 'as' => 'admin.'],funct
     Route::post('/store',[PostController::class,'store'])->name('posts.store');
     Route::get('/edit/{post}',[PostController::class,'edit'])->name('posts.edit');
     Route::put('/update/{post}',[PostController::class,'update'])->name('posts.update');
-    Route::get('/delete/{post}',[PostController::class,'delete'])->name('posts.delete');
+    Route::delete('/delete/{post}',[PostController::class,'delete'])->name('posts.delete');
 
     Route::resource('/categories',CategoryController::class);
     Route::resource('/tags',TagController::class);
