@@ -61,6 +61,10 @@ class PostTest extends TestCase
             'title' => $post['title'],
             'category_id' => $post['category_id'],
         ]);
+        $this->assertEquals(
+            request()->route()->middleware(),
+            $this->middlewares
+        );
     }
 
     public function testUpdateApostWithUpdateeMethod()
@@ -87,6 +91,10 @@ class PostTest extends TestCase
         ]);
 
         $this->assertEquals($newTags->pluck('name'), $post->tags()->pluck('name'));
+        $this->assertEquals(
+            request()->route()->middleware(),
+            $this->middlewares
+        );
     }
     public function testDeleteAPostWithDestroyMethod()
     {
@@ -97,6 +105,12 @@ class PostTest extends TestCase
         $user=User::factory()->create();
         $this->actingAs($user)
         ->delete(route('admin.posts.delete',$post->id));
-        $this->assertDatabaseMissing('posts',$post->toArray());
+        $this->assertDatabaseMissing('posts',$post->toArray())
+        ->assertEmpty($post->tags);
+        $this->assertEquals(
+            request()->route()->middleware(),
+            $this->middlewares
+        );
+
     }
 }
