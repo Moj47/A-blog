@@ -64,5 +64,30 @@ class PostTest extends TestCase
     ]);
     }
 
+    public function testUpdateApostWithUpdateeMethod()
+{
+    $category = Category::factory()->create();
+    $post = Post::factory()->hasTags(rand(1, 5))->create(['category_id' => $category->id]);
+
+    $user = User::factory()->create();
+    $category2 = Category::factory()->create();
+    $newPost = Post::factory()->make(['category_id' => $category2->id])->toArray();
+    $newTags = Tag::factory()->count(rand(1, 5))->make();
+
+    $response=$this->actingAs($user)
+        ->put(route('admin.posts.update',$post->id), array_merge($newPost, [
+            'tags' => $newTags->pluck('name')->implode(' '),
+        ]));
+
+    $response->assertRedirect();
+    $this->assertDatabaseHas('posts', [
+        'id' => $post->id,
+        'title' => $newPost['title'],
+        'text' => $newPost['text'],
+        'category_id' => $newPost['category_id'],
+    ]);
+
+    $this->assertEquals($newTags->pluck('name'), $post->tags()->pluck('name'));
+}
 
 }

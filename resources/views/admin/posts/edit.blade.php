@@ -45,29 +45,29 @@
                         <span class="help-block">Separated by space</span>
                     </div>
                     <div class="form-group">
-                        <label class="required" for="category">Category</label>
-                        <select class="form-control {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category"
-                                id="category" required>
+                        <label class="required" for="category_id">Category</label>
+                        <select class="form-control {{ $errors->has('category') ? 'is-invalid' : '' }}" name="category_id"
+                                id="category_id" required>
                             <option value="0">--- SELECT CATEGORY ---</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}"
                                     @if ($category->id == $post->category_id) selected @endif>{{ $category->name }}</option>
                             @endforeach
                         </select>
-                        @if($errors->has('category'))
+                        @if($errors->has('category_id'))
                             <div class="invalid-feedback">
-                                {{ $errors->first('category') }}
+                                {{ $errors->first('category_id') }}
                             </div>
                         @endif
                         <span class="help-block"></span>
                     </div>
                     <div class="form-group">
-                        <label for="post">Post</label>
-                        <textarea class="form-control {{ $errors->has('post') ? 'is-invalid' : '' }}" name="post"
-                                  id="post">{{ $post->text }}</textarea>
-                        @if($errors->has('post'))
+                        <label for="post">Text</label>
+                        <textarea class="form-control {{ $errors->has('text') ? 'is-invalid' : '' }}" name="text"
+                                  id="text">{{ $post->text }}</textarea>
+                        @if($errors->has('text'))
                             <div class="invalid-feedback">
-                                {{ $errors->first('post') }}
+                                {{ $errors->first('text') }}
                             </div>
                         @endif
                         <span class="help-block"></span>

@@ -81,9 +81,10 @@ class PostController extends Controller
         'title'=>'required|string',
         'image'=>'image|nullable',
         'tags'=>'required|string',
-        'category'=>'required|numeric|min:0|not_in:0',
-        'post'=>'required|string',
+        'category_id'=>'required|numeric|min:0|not_in:0',
+        'text'=>'required|string',
      ]);
+
      $tags=explode(' ',$request->tags);
      if($request->has('image'))
      {
@@ -98,8 +99,8 @@ class PostController extends Controller
      $post->update([
         'title'=>$request->title,
         'image'=>$imagePath,
-        'category_id'=>$request->category,
-        'text'=>$request->post,
+        'category_id'=>$request->category_id,
+        'text'=>$request->text,
      ]);
 
      $post->tags()->detach();
