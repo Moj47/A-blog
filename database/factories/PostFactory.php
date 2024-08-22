@@ -25,7 +25,7 @@ class PostFactory extends Factory
         'title' => $this->faker->title(),
         'text' =>$this->faker->text(),
         'category_id'=>$category->id,
-        'image' =>$this->faker->imageUrl()
+        'image' => UploadedFile::fake()->image('test.jpg', 400, 400),
     ];
 
 }
