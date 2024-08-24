@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -51,7 +52,7 @@ class CategoryTest extends TestCase
             $this->middlewares
         );
     }
-    public function testUpdateATagWithUpdateMethod()
+    public function testUpdateACategoryWithUpdateMethod()
     {
         $category = Category::factory()->create();
         $category2 = Category::factory()->make()->toArray();
@@ -84,4 +85,17 @@ class CategoryTest extends TestCase
             $this->middlewares
         );
     }
+    public function testCannotDeleteCategoryWithAssociatedPosts()
+{
+    $category = Category::factory()->create();
+    $post = Post::factory()->create(['category_id' => $category->id]);
+
+    $user = User::factory()->create();
+    $this->actingAs($user);
+
+    $response = $this->delete(route('admin.categories.destroy', $category->id))
+    ->assertSessionHasAll(['errors'=>'This Category has some posts you can not delete it!'])
+    ->assertRedirect(route('admin.categories.index'));
+    $this->assertDatabaseHas('categories', $category->toArray());
+}
 }

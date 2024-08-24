@@ -73,7 +73,7 @@ class CategoryController extends Controller
         $post=Post::where('category_id',$category->id)->get();
         if($post->count()!=0)
         {
-            return back()->with('errors','This Category has some posts you can not delete it!');
+            return to_route('admin.categories.index')->with('errors','This Category has some posts you can not delete it!');
         }
         else
         {
