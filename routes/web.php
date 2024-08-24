@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('/{post}',[PostController::class,'show'])->name('post.show')->whereNumber('post');
+Route::get('/about-me',function(){
+    return view('aboutme');
+})->name('aboutme');
 Route::group(['middleware'=>'auth' ,'prefix' => 'admin', 'as' => 'admin.'],function () {
     Route::get('/posts-list',[PostController::class,'adminIndex'])->name('posts.index');
     Route::get('/create',[PostController::class,'create'])->name('posts.create');
