@@ -8,7 +8,7 @@ Welcome to my Blog project! This is a beginner-level application developed follo
 - Full-featured back-end capabilities
 - Automated tests to ensure functionality
 - Database factories for seamless data generation
-  (I alomst Copied all parts of Views because i don't like front-end XD but i add some extra features like Factory and tests)
+- (I alomst Copied all parts of Views because i don't like front-end XD but i add some extra features like Factory and tests)
 ## Installation
 
 To get started with this project, follow these steps:
